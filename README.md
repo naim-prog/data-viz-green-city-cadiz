@@ -1,10 +1,9 @@
 # Introduction
 
-The intention of this is to gather data to report which is the greener city of Cádiz, Andalusia.
+La intención de este proyecto es recopilar datos para ver cual es la ciudad más verde de Cádiz, Andalucía.
 
-As I live here, I would like to play around with Copernicus Browser and GeoData.
+Como vivo aquí me gustaría probar un poco con Copernicus Browser y datos geoespaciales.
 
-This may end up in nothing, but I love trying new things, and if they don't work, make it work
+Puede que esto acabe en nada, pero siempre hay una primera vez para probar cosas y hacerlas funcionar.
 
 🙂
-

@@ -1,10 +1,10 @@
-# OSM stored data
+# Directorio de archivos OSM
 osm/
 
-# Test images, files and scripts
+# Scripts, tests, imagenes y archivos varios
 test/
 
-# URL's of interest
+# URLs de interés
 urls.txt
 
 # Byte-compiled / optimized / DLL files

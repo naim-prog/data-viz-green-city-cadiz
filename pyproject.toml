@@ -1,7 +1,7 @@
 [project]
 name = "data-viz-green-city-cadiz"
 version = "0.1.0"
-description = "Project for visualization of geospatial data of Cádiz"
+description = "Proyecto de visualizacion de datos geoespaciales de Cádiz"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
