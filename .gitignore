@@ -1,6 +1,9 @@
 # Directorio de archivos OSM
 osm/
 
+# Directorio de archivos del CNIG
+cnig/
+
 # Scripts, tests, imagenes y archivos varios
 test/
 
