@@ -4,6 +4,9 @@ osm/
 # Directorio de archivos del CNIG
 cnig/
 
+# Directorio para archivos binarios GeoTIFF
+b_geotiff/
+
 # Scripts, tests, imagenes y archivos varios
 test/
 
