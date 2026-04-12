@@ -1,17 +1,12 @@
-// 1. Inicializamos el mapa centrado en la provincia de Cádiz
 const mapa = L.map('mapa-cadiz').setView([36.5271, -5.9675], 9);
 
-// 2. Añadimos la capa base de OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: '© OpenStreetMap contributors'
 }).addTo(mapa);
 
-// Variable para guardar los datos del CSV
 let datosPorMunicipio = {};
 
-// 3. Función para asignar un color dependiendo del porcentaje
-// Puedes cambiar estos colores HEX por los que más te gusten
 function obtenerColor(porcentaje) {
     return porcentaje > 80 ? '#005a32' : // Verde muy oscuro
            porcentaje > 60 ? '#238b45' : // Verde oscuro
@@ -20,21 +15,26 @@ function obtenerColor(porcentaje) {
                              '#c7e9c0';  // Verde muy claro (0-20%)
 }
 
-// 4. Leemos el CSV desde GitHub Pages
 Papa.parse("https://raw.githubusercontent.com/naim-prog/data-viz-green-city-cadiz/refs/heads/main/files/datos_municipios.csv", {
-    download: true,       // Le dice a PapaParse que es un archivo externo
-    header: true,         // Usa la primera fila como nombres de variables
-    dynamicTyping: true,  // Convierte los números de texto a formato numérico
+    download: true,
+    header: true,
+    dynamicTyping: true,
     complete: function(resultados) {
-        
-        // Guardamos los datos en un diccionario: {"Jerez": 45.2, "Tarifa": 60.1}
+        let listaParaOrdenar = [];
+
         resultados.data.forEach(fila => {
             if (fila.nombre_municipio && fila.porcentaje_vegetacion !== undefined) {
                 datosPorMunicipio[fila.nombre_municipio] = fila.porcentaje_vegetacion;
+                // Guardamos en un array para poder ordenar
+                listaParaOrdenar.push({
+                    nombre: fila.nombre_municipio,
+                    valor: fila.porcentaje_vegetacion
+                });
             }
         });
 
-        // Una vez tenemos el CSV, cargamos los polígonos
+        listaParaOrdenar.sort((a, b) => b.valor - a.valor);
+        generarTablaHTML(listaParaOrdenar);
         cargarGeoJSON();
     }
 });
@@ -48,10 +48,8 @@ function cargarGeoJSON() {
             capaGeoJSON = L.geoJson(datosGeoJSON, {
                 // A) Estilo de cada municipio
                 style: function(feature) {
-                    // OJO: "feature.properties.name" depende de cómo esté estructurado tu GeoJSON.
-                    // A veces se llama "NAMEUNIT", "Municipio", etc. Ábrelo con un bloc de notas para comprobarlo.
                     const nombreMuni = feature.properties.nombre_municipio; 
-                    const porcentaje = datosPorMunicipio[nombreMuni] || 0; // Si no hay datos, ponemos 0
+                    const porcentaje = datosPorMunicipio[nombreMuni];
 
                     return {
                         fillColor: obtenerColor(porcentaje),
@@ -100,4 +98,39 @@ function cargarGeoJSON() {
             
         })
         .catch(error => console.error("Error cargando el GeoJSON:", error));
+}
+
+// Elementos del DOM
+const btnTabla = document.getElementById('btn-tabla');
+const modalTabla = document.getElementById('modal-tabla');
+const btnCerrar = document.getElementById('btn-cerrar');
+const cuerpoTabla = document.querySelector('#tabla-vegetacion tbody');
+
+// Función para abrir/cerrar modal
+btnTabla.onclick = () => modalTabla.classList.remove('oculto');
+btnCerrar.onclick = () => modalTabla.classList.add('oculto');
+
+// Cerramos si el usuario hace clic fuera de la caja blanca
+window.onclick = (e) => {
+    if (e.target == modalTabla) modalTabla.classList.add('oculto');
+};
+
+function generarTablaHTML(datosOrdenados) {
+    cuerpoTabla.innerHTML = "";
+    
+    datosOrdenados.forEach(item => {
+        let valor = item.valor;
+        if (valor !== null) {
+            valor = valor.toFixed(2) + "%";
+        } else {
+            valor = "Sin datos";
+        }
+        const fila = `
+            <tr>
+                <td>${item.nombre}</td>
+                <td><b>${valor}</b></td>
+            </tr>
+        `;
+        cuerpoTabla.innerHTML += fila;
+    });
 }
