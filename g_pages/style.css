@@ -1,0 +1,20 @@
+/* Eliminamos márgenes por defecto */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* El mapa debe tener una altura definida para que Leaflet lo pueda renderizar */
+#mapa-cadiz {
+    width: 100%;
+    height: 100vh; /* 100% de la altura de la ventana */
+}
+
+/* Pequeño retoque para el popup/tooltip al pasar el ratón */
+.leaflet-tooltip {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 4px;
+}
