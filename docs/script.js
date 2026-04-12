@@ -21,7 +21,7 @@ function obtenerColor(porcentaje) {
 }
 
 // 4. Leemos el CSV desde GitHub Pages
-Papa.parse("../files/datos_municipios.csv", {
+Papa.parse("https://github.com/naim-prog/data-viz-green-city-cadiz/blob/main/files/datos_municipios.csv", {
     download: true,       // Le dice a PapaParse que es un archivo externo
     header: true,         // Usa la primera fila como nombres de variables
     dynamicTyping: true,  // Convierte los números de texto a formato numérico
@@ -41,7 +41,7 @@ Papa.parse("../files/datos_municipios.csv", {
 
 // 5. Función para cargar dibujar los municipios
 function cargarGeoJSON() {
-    fetch('../files/municipios_cadiz.geojson') // Tu archivo con las fronteras
+    fetch('https://github.com/naim-prog/data-viz-green-city-cadiz/blob/main/files/municipios_cadiz.geojson') // Tu archivo con las fronteras
         .then(respuesta => respuesta.json())
         .then(datosGeoJSON => {
             
