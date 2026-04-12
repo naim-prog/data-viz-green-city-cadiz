@@ -8,6 +8,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let datosPorMunicipio = {};
 
 function obtenerColor(porcentaje) {
+    if (porcentaje === null) {return '#000000'};
     return porcentaje > 80 ? '#005a32' : // Verde muy oscuro
            porcentaje > 60 ? '#238b45' : // Verde oscuro
            porcentaje > 40 ? '#41ab5d' : // Verde normal
