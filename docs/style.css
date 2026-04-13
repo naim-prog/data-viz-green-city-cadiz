@@ -1,97 +1,36 @@
-/* Eliminamos márgenes por defecto */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+/* Limpiamos la tipografía del mapa para que coincida con la web */
+.leaflet-container {
+    font-family: inherit;
 }
 
-/* El mapa debe tener una altura definida para que Leaflet lo pueda renderizar */
-#mapa-cadiz {
-    width: 100%;
-    height: 100vh; /* 100% de la altura de la ventana */
-}
-
-/* Pequeño retoque para el popup/tooltip al pasar el ratón */
+/* Tooltip (bocadillo) de Leaflet modernizado */
 .leaflet-tooltip {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    border-radius: 4px;
+    background-color: white;
+    border: none !important;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    color: #1e293b;
+    font-size: 0.875rem;
 }
 
-/* Botón circular en la esquina superior derecha */
-#btn-tabla {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1001; /* Por encima del mapa */
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: white;
-    border: 2px solid #ccc;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    transition: background 0.3s;
+/* Espaciado de las celdas de la tabla */
+#tabla-vegetacion td {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
 }
 
-#btn-tabla:hover { background: #f4f4f4; }
-
-/* Modal y Overlay */
-#modal-tabla {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 2000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
+/* Diseño profesional para la barra de scroll de la tabla */
+::-webkit-scrollbar {
+    width: 6px;
 }
-
-.oculto { display: none !important; }
-
-.contenido-modal {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative;
+::-webkit-scrollbar-track {
+    background: transparent; 
 }
-
-.cabecera-modal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #eee;
-    margin-bottom: 15px;
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1; 
+    border-radius: 10px;
 }
-
-#btn-cerrar {
-    background: none;
-    border: none;
-    font-size: 30px;
-    cursor: pointer;
-    color: #888;
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; 
 }
-
-/* Estilo de la tabla */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    text-align: left;
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-th { background-color: #f2f2f2; }
