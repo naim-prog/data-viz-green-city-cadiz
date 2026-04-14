@@ -1,4 +1,4 @@
-# Análisis de masa vegetal en los municipios de Cádiz mediante imágenes satelitales
+# Análisis de cobertura vegetal en los municipios de Cádiz mediante imágenes satelitales
 
 <h3> ¿Cuanta vegetación se encuentra dentro de cada municipio de Cádiz? </h3>
 
@@ -8,19 +8,19 @@ Algunos municipios cuentan con un límite administrativo bastante grande en comp
 
 # Tecnologías
 
-* **Procesamiento de imágenes**: Python (NumPy, geopandas, Rasterio y OpenCV)
+* **Lenguajes y librerías**: Python (`NumPy`, `geopandas`, `Rasterio` y `OpenCV`) para el procesamiento de imágenes
 
-* **Análisis Geoespacial**: QGIS
+* **Análisis Geoespacial**: QGIS para visualización y validación
 
-* **Fuentes de datos**: PNOA (CNIG) y OpenStreetMap
+* **Fuentes de datos**: Ortofotos PNOA (CNIG) y límites administrativos de OpenStreetMap
 
 # Metodología
 
 Las imágenes satelitales (0.25m x 0.25m por píxel) han sido binarizadas siguiendo 3 condiciones para contabilizar un píxel de la imagen como '**Vegetacion**':
 
-* **Normalized Difference Vegetation Index**: el coeficiente **NDVI** debe superar un umbral de **0.35**. Siendo calculado de la siguiente forma:
+* **Normalized Difference Vegetation Index**: el coeficiente **NDVI** debe superar un umbral de **0.35**. Siendo calculado usando los valores de las bandas **NIR** y **Roja** de la siguiente forma:
 
-$$NIR = \dfrac{NIR - Roja}{NIR + Roja}$$
+$$NDVI = \dfrac{NIR - Roja}{NIR + Roja}$$
 
 * **Umbral de brillo**: el brillo de las bandas **NIR** y **Roja** deben superar un umbral de **40** para descartar posibles sombras o aguas oscuras
 
