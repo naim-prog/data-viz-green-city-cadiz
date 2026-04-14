@@ -1,4 +1,4 @@
-# Introduccion
+# Análisis de masa vegetal en los municipios de Cádiz mediante imágenes satelitales
 
 <h3> ¿Cuanta vegetación se encuentra dentro de cada municipio de Cádiz? </h3>
 
@@ -6,21 +6,31 @@ Este proyecto intenta mediante el estudio de las imágenes satelitales dar luz a
 
 Algunos municipios cuentan con un límite administrativo bastante grande en comparación con el núcleo urbano que tiene, pero esto no exime de la posibilidad de alojar zonas verdes como parques o plazas en municipios con un área administrativa más pequeña que otros.
 
+# Tecnologías
+
+* **Procesamiento de imágenes**: Python (NumPy, Rasterio y OpenCV)
+
+* **Análisis Geoespacial**: QGIS
+
+* **Fuentes de datos**: PNOA (CNIG) y OpenStreetMap
+
 # Metodología
 
-Las imágenes satelitales (con resolución 0.25m. x 0.25m. por píxel) han sido binarizadas siguiendo 3 condiciones para contabilizar un píxel de la imagen como '**Vegetacion**':
+Las imágenes satelitales (0.25m x 0.25m por píxel) han sido binarizadas siguiendo 3 condiciones para contabilizar un píxel de la imagen como '**Vegetacion**':
 
-* El coeficiente **NDVI** (_Normalized Difference Vegetation Index_) debe superar un umbral de **0.35**
+* **Normalized Difference Vegetation Index**: el coeficiente **NDVI** debe superar un umbral de **0.35**. Siendo calculado de la siguiente forma:
 
-* El brillo de las bandas **NIR** y **Roja** deben superar un umbral de **40**
+$$NIR = \dfrac{NIR - Roja}{NIR + Roja}$$
 
-* La intensidad de la banda **NIR** debe superar un valor de **100**
+* **Umbral de brillo**: el brillo de las bandas **NIR** y **Roja** deben superar un umbral de **40** para descartar posibles sombras o aguas oscuras
 
-En caso de que un píxel superase todas estas condiciones sería considerado como '**Vegetacion**'
+* **Intensidad de reflectancia**: la intensidad de la banda **NIR** debe superar un valor de **100** para confirmar una masa vegetal
+
+En caso de un píxel superar de manera simultánea estas 3 condiciones sería considerado como '**Vegetacion**'
 
 # Resultados
 
-Pueden verse los resultados de este proyecto en la web [naim-prog.github.io/green-city-cadiz](https://naim-prog.github.io/green-city-cadiz)
+Los resultados (ranking y mapa interactivo) pueden encontrarse en la web del proyecto: [naim-prog.github.io/green-city-cadiz](https://naim-prog.github.io/green-city-cadiz)
 
 # Fuentes
 
